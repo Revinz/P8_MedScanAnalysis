@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Min_Max_Slider;
 [ExecuteInEditMode]
-public class ModelClippingHandler : MonoBehaviour
+public class ModelClippingHandler : MonoBehaviour 
 {
 
     //Properties used for the shader interaction
     public Vector3 ClipMax = new Vector3(1, 1, 1);
     public Vector3 ClipMin = new Vector3(0, 0, 0);
+    public MinMaxSlider sliderX;
+    public MinMaxSlider sliderY;
+    public MinMaxSlider sliderZ;
 
     private Vector3 boundsMax;
     private Vector3 boundsMin;
@@ -19,7 +22,13 @@ public class ModelClippingHandler : MonoBehaviour
         Debug.Log("Clipping handler setup - ");
         SetupShaders();
     }
+    private void Start()
+    {
 
+        UpdateXValues();
+        UpdateYValues();
+        UpdateZValues();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -45,6 +54,24 @@ public class ModelClippingHandler : MonoBehaviour
             ModelMeshes.Add(rootModelMesh);
         }
     }
+
+    public void UpdateXValues()
+    {
+        ClipMin.x = sliderX.minValue/sliderX.maxLimit;
+        ClipMax.x = sliderX.maxValue/sliderX.maxLimit;
+
+    }
+    public void UpdateYValues()
+    {
+        ClipMin.y = sliderY.minValue / sliderY.maxLimit;
+        ClipMax.y = sliderY.maxValue / sliderY.maxLimit;
+    }
+    public void UpdateZValues()
+    {
+        ClipMin.z = sliderZ.minValue / sliderZ.maxLimit;
+        ClipMax.z = sliderZ.maxValue / sliderZ.maxLimit;
+    }
+
 
     // Finds the max and min bounderies for the model.
     void updateObjectBoundsInfo() {
