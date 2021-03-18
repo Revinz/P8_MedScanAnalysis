@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityVolumeRendering;
 
 public class ModelMesh : MonoBehaviour
 {   
-    public Color meshColor = Color.white;
+    public VolumeDataset dataset;
     [HideInInspector]
     public Renderer rend;
     private MaterialPropertyBlock propBlock;
@@ -13,22 +14,22 @@ public class ModelMesh : MonoBehaviour
         Debug.Log("Mesh setup");
         rend = GetComponent<MeshRenderer>();
         propBlock = new MaterialPropertyBlock();
+
+        //Setup the texture3D for the mesh
+        rend.GetPropertyBlock(propBlock);
+        propBlock.SetTexture("_Volume", dataset.GetDataTexture());
+        rend.SetPropertyBlock(propBlock); 
     }
 
-    public void UpdateShaderProperties(Vector3 boundsMax, Vector3 boundsMin,
-                                         Vector3 ClipMax, Vector3 ClipMin)
+    public void UpdateShaderProperties(Vector3 ClipMax, Vector3 ClipMin, float DarkeningAmountBack, float DarkeningAmountFront)
     {
-        //Debug.Log(i);
         rend.GetPropertyBlock(propBlock);
 
-        //Update boundary box and clipping positions in the shader
-        propBlock.SetVector("BoundsMax", boundsMax);
-        propBlock.SetVector("BoundsMin", boundsMin);
-        propBlock.SetVector("ClipMax", ClipMax);
-        propBlock.SetVector("ClipMin", ClipMin);
-
-        //Other props
-        propBlock.SetVector("ClippingModelColor", meshColor);
+        //Update clipping positions and darkening thresholds
+        propBlock.SetVector("_ClipMax", ClipMax);
+        propBlock.SetVector("_ClipMin", ClipMin);
+        propBlock.SetFloat("_DarkeningThresholdFront", DarkeningAmountFront);
+        propBlock.SetFloat("_DarkeningThresholdBack", DarkeningAmountBack);
 
         rend.SetPropertyBlock(propBlock); 
     }

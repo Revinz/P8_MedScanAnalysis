@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#Generated texture3Ds of the model
+*/texture3D.asset
+*/texture3DGradiant.asset
+
