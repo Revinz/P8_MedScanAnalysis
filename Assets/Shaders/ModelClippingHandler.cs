@@ -8,14 +8,8 @@ using UnityVolumeRendering;
 public class ModelClippingHandler : MonoBehaviour 
 {   
     public Material[] _mat;
-    //Properties used for the shader interaction
     [Header("Shader properties")]
-    [Range(0.0f, 1.0f)]
-    public float darkeningAmountFront = 0;
-    [Range(0.0f, 1.0f)]
-    public float darkeningAmountBack = 1;
-    public Vector3 ClipMax = new Vector3(1, 1, 1);
-    public Vector3 ClipMin = new Vector3(0, 0, 0);
+    public ClippingShaderProps props;
 
     [Header("Slider Objects")]
     public MinMaxSlider sliderX;
@@ -25,6 +19,7 @@ public class ModelClippingHandler : MonoBehaviour
     private List<ModelMesh> ModelMeshes = new List<ModelMesh>();
 
     private void createModelObject(VolumeDataset volumeDataset) {
+        props = new ClippingShaderProps();
         GameObject model = GameObject.CreatePrimitive(PrimitiveType.Cube);
         model.transform.parent = this.transform;
         model.GetComponent<MeshRenderer>().materials = _mat;
@@ -44,7 +39,7 @@ public class ModelClippingHandler : MonoBehaviour
 
     private void Start()
     {
-        string path = @"CHANGE PATH TO DICOM MODEL FOLDER´THAT CONTAINS ALL THE .DCM FILES - Can be anywhere on the PC";
+        string path = @"C:\Users\PStaa\OneDrive\Skrivebord\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)";
         VolumeDataset dataset = new DICOMLoader().LoadFolder(path);
         createModelObject(dataset);
         // UpdateXValues();
@@ -79,19 +74,19 @@ public class ModelClippingHandler : MonoBehaviour
 
     public void UpdateXValues()
     {
-        ClipMin.x = sliderX.minValue/sliderX.maxLimit;
-        ClipMax.x = sliderX.maxValue/sliderX.maxLimit;
+        props.ClipMin.x = sliderX.minValue/sliderX.maxLimit;
+        props.ClipMax.x = sliderX.maxValue/sliderX.maxLimit;
 
     }
     public void UpdateYValues()
     {
-        ClipMin.y = sliderY.minValue / sliderY.maxLimit;
-        ClipMax.y = sliderY.maxValue / sliderY.maxLimit;
+        props.ClipMin.y = sliderY.minValue / sliderY.maxLimit;
+        props.ClipMax.y = sliderY.maxValue / sliderY.maxLimit;
     }
     public void UpdateZValues()
     {
-        ClipMin.z = sliderZ.minValue / sliderZ.maxLimit;
-        ClipMax.z = sliderZ.maxValue / sliderZ.maxLimit;
+        props.ClipMin.z = sliderZ.minValue / sliderZ.maxLimit;
+        props.ClipMax.z = sliderZ.maxValue / sliderZ.maxLimit;
     }
 
 
@@ -122,7 +117,7 @@ public class ModelClippingHandler : MonoBehaviour
         Debug.Log(ModelMeshes.Count);
         foreach (ModelMesh mesh in ModelMeshes)
         {
-            mesh.UpdateShaderProperties(ClipMax, ClipMin, darkeningAmountBack, darkeningAmountFront);
+            mesh.UpdateShaderProperties(props);
         }
 
     }
