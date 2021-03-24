@@ -33,6 +33,7 @@ public class ModelClippingHandler : MonoBehaviour
         Debug.Log(ModelMeshes.Count);
         Debug.Log("Post-add");
         newModel.SetupMesh();
+        model.transform.Rotate(new Vector3(-90, 0, 0));
 
         Debug.Log("Model created with volume dataset");
     }
