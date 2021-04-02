@@ -71,7 +71,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NumSteps: 1024
+    - _NumSteps: 512
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _Radius: 2.07
@@ -84,10 +84,11 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _renderingMode: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _ClipEnd: {r: 0.51, g: 1, b: 1, a: 1}
-    - _ClipMax: {r: 0.5, g: 0.91, b: 1, a: 0}
+    - _ClipMax: {r: 0.44, g: 1, b: 1, a: 0}
     - _ClipMin: {r: 0.5, g: 0, b: 0, a: 0}
     - _ClipStart: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

@@ -27,15 +27,10 @@ public class ModelClippingHandler : MonoBehaviour
         model.AddComponent<ModelMesh>();
         ModelMesh newModel = model.GetComponent<ModelMesh>();
         newModel.dataset = volumeDataset;
-        Debug.Log("Pre-add");
-        Debug.Log(ModelMeshes.Count);
         ModelMeshes.Add(newModel);
-        Debug.Log(ModelMeshes.Count);
-        Debug.Log("Post-add");
         newModel.SetupMesh();
-        model.transform.Rotate(new Vector3(-90, 0, 0));
 
-        Debug.Log("Model created with volume dataset");
+        model.transform.Rotate(new Vector3(-90, 0, 0));
     }
 
     private void Start()
