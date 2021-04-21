@@ -11,16 +11,13 @@ public class ModelClippingHandler : MonoBehaviour
     [Header("Shader properties")]
     public ClippingShaderProps props;
 
-    [Header("Slider Objects")]
-    public MinMaxSlider sliderX;
-    public MinMaxSlider sliderY;
-    public MinMaxSlider sliderZ;
 
     private List<ModelMesh> ModelMeshes = new List<ModelMesh>();
 
     private void createModelObject(VolumeDataset volumeDataset) {
         props = new ClippingShaderProps();
         GameObject model = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        model.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         model.transform.parent = this.transform;
         model.GetComponent<MeshRenderer>().materials = _mat;
 
@@ -35,7 +32,7 @@ public class ModelClippingHandler : MonoBehaviour
 
     private void Start()
     {
-        string path = @"C:\Users\PStaa\OneDrive\Skrivebord\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)";
+        string path = @"D:\Projects\Spine_HardTissue";
         VolumeDataset dataset = new DICOMLoader().LoadFolder(path);
         createModelObject(dataset);
         // UpdateXValues();
@@ -67,24 +64,6 @@ public class ModelClippingHandler : MonoBehaviour
     //         ModelMeshes.Add(rootModelMesh);
     //     }
     // }
-
-    public void UpdateXValues()
-    {
-        props.ClipMin.x = sliderX.minValue/sliderX.maxLimit;
-        props.ClipMax.x = sliderX.maxValue/sliderX.maxLimit;
-
-    }
-    public void UpdateYValues()
-    {
-        props.ClipMin.y = sliderY.minValue / sliderY.maxLimit;
-        props.ClipMax.y = sliderY.maxValue / sliderY.maxLimit;
-    }
-    public void UpdateZValues()
-    {
-        props.ClipMin.z = sliderZ.minValue / sliderZ.maxLimit;
-        props.ClipMax.z = sliderZ.maxValue / sliderZ.maxLimit;
-    }
-
 
     // // Finds the max and min bounderies for the model.
     // void updateObjectBoundsInfo() {
