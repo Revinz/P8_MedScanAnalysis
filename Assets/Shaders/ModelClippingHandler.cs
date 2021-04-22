@@ -17,7 +17,6 @@ public class ModelClippingHandler : MonoBehaviour
     private void createModelObject(VolumeDataset volumeDataset) {
         props = new ClippingShaderProps();
         GameObject model = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        model.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         model.transform.parent = this.transform;
         model.GetComponent<MeshRenderer>().materials = _mat;
 
@@ -27,7 +26,9 @@ public class ModelClippingHandler : MonoBehaviour
         ModelMeshes.Add(newModel);
         newModel.SetupMesh();
 
-        model.transform.Rotate(new Vector3(-90, 0, 0));
+        model.transform.Rotate(new Vector3(-90f, 0, 45f));
+        model.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        model.transform.localPosition = new Vector3(0f, 0.1f, 0f);
     }
 
     private void Start()
