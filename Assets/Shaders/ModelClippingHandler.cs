@@ -5,13 +5,18 @@ using UnityEditor;
 using Min_Max_Slider;
 using UnityVolumeRendering;
 
-public class ModelClippingHandler : MonoBehaviour 
-{   
+public class ModelClippingHandler : MonoBehaviour
+{
+    public bool flag=true;
     public Material[] _mat;
     [Header("Shader properties")]
     public ClippingShaderProps props;
-
-
+    /*
+    [Header("Slider Objects")]
+    public MinMaxSlider sliderX;
+    public MinMaxSlider sliderY;
+    public MinMaxSlider sliderZ;
+    */
     private List<ModelMesh> ModelMeshes = new List<ModelMesh>();
 
     private void createModelObject(VolumeDataset volumeDataset) {
@@ -25,10 +30,7 @@ public class ModelClippingHandler : MonoBehaviour
         newModel.dataset = volumeDataset;
         ModelMeshes.Add(newModel);
         newModel.SetupMesh();
-
-        model.transform.Rotate(new Vector3(-90f, 0, 45f));
-        model.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        model.transform.localPosition = new Vector3(0f, 0.1f, 0f);
+        model.transform.Rotate(new Vector3(-90, 0, 0));
     }
 
     private void Start()
@@ -65,6 +67,25 @@ public class ModelClippingHandler : MonoBehaviour
     //         ModelMeshes.Add(rootModelMesh);
     //     }
     // }
+    /*
+    public void UpdateXValues()
+    {
+        props.ClipMin.x = sliderX.minValue/sliderX.maxLimit;
+        props.ClipMax.x = sliderX.maxValue/sliderX.maxLimit;
+
+    }
+    public void UpdateYValues()
+    {
+        props.ClipMin.y = sliderY.minValue / sliderY.maxLimit;
+        props.ClipMax.y = sliderY.maxValue / sliderY.maxLimit;
+    }
+    public void UpdateZValues()
+    {
+        props.ClipMin.z = sliderZ.minValue / sliderZ.maxLimit;
+        props.ClipMax.z = sliderZ.maxValue / sliderZ.maxLimit;
+    }
+    */
+
 
     // // Finds the max and min bounderies for the model.
     // void updateObjectBoundsInfo() {
@@ -89,13 +110,16 @@ public class ModelClippingHandler : MonoBehaviour
 
     //Updates all the clipping shaders in the gameobject tree with the model
     void updateShaderProperties() {
+        if (flag == true)
 
-        Debug.Log(ModelMeshes.Count);
-        foreach (ModelMesh mesh in ModelMeshes)
         {
-            mesh.UpdateShaderProperties(props);
+            Debug.Log(ModelMeshes.Count);
+            foreach (ModelMesh mesh in ModelMeshes)
+            {
+                mesh.UpdateShaderProperties(props);
+            }
         }
-
+        flag = false;
     }
 }
 

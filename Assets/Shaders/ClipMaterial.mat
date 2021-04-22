@@ -32,6 +32,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DataTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DecalTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -48,11 +56,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Gradient:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GradientTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -65,6 +85,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TFTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -81,6 +105,8 @@ Material:
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DarkeningThresholdBack: 1
+    - _DarkeningThresholdFront: 0.286
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _EnvironmentReflections: 1
@@ -88,8 +114,11 @@ Material:
     - _Glossiness: 0.5
     - _GlossinessSource: 0
     - _GlossyReflections: 1
+    - _MaxVal: 1
     - _Metallic: 0
+    - _MinVal: 0
     - _Mode: 0
+    - _NumSteps: 512
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -106,6 +135,7 @@ Material:
     - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 0
+    - _renderingMode: 1
     - xBoundMax: 0
     - xBoundMin: 0
     - xClipMax: 0
@@ -118,6 +148,8 @@ Material:
     - ClippingModelColor: {r: 0.6886792, g: 0.23064259, b: 0.23064259, a: 0}
     - Vector3_E3E6041C: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ClipMax: {r: 1, g: 1, b: 1, a: 1}
+    - _ClipMin: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
