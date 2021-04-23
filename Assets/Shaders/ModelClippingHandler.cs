@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Min_Max_Slider;
 using UnityVolumeRendering;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class ModelClippingHandler : MonoBehaviour
 {
@@ -30,7 +30,9 @@ public class ModelClippingHandler : MonoBehaviour
         newModel.dataset = volumeDataset;
         ModelMeshes.Add(newModel);
         newModel.SetupMesh();
-        model.transform.Rotate(new Vector3(-90, 0, 0));
+        model.transform.Rotate(new Vector3(-90, 180, 0));
+        model.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        model.transform.localPosition = new Vector3(0f, 0.1f, 0f);
     }
 
     private void Start()
@@ -110,16 +112,71 @@ public class ModelClippingHandler : MonoBehaviour
 
     //Updates all the clipping shaders in the gameobject tree with the model
     void updateShaderProperties() {
-        if (flag == true)
+      //  if (flag == true)
 
-        {
+       // {
             Debug.Log(ModelMeshes.Count);
             foreach (ModelMesh mesh in ModelMeshes)
             {
                 mesh.UpdateShaderProperties(props);
             }
-        }
-        flag = false;
+      //  }
+     //   flag = false;
+    }
+
+    public void ClipXMax(PinchSlider sliderXMax)
+    {
+        props.ClipMax.x = sliderXMax.SliderValue;
+        
+
+    }
+    public void ClipXMin(PinchSlider sliderXMin)
+    {
+        props.ClipMin.x = sliderXMin.SliderValue;
+
+    }
+    public void ClipYMax(PinchSlider sliderYMax)
+    {
+        props.ClipMax.z = sliderYMax.SliderValue;
+
+    }
+    public void ClipYMin(PinchSlider sliderYMin)
+    {
+        props.ClipMin.z = sliderYMin.SliderValue;
+
+    }
+    public void ClipZMax (PinchSlider sliderZMax)
+    {
+        props.ClipMax.y = sliderZMax.SliderValue;
+
+    }
+    public void ClipZMin(PinchSlider sliderZMin)
+    {
+        props.ClipMin.y = sliderZMin.SliderValue;
+
+    }
+    public void ClipDarknesFront (PinchSlider sliderFront)
+    {
+        props.darkeningAmountFront = sliderFront.SliderValue;
+
+    }
+    public void ClipDarknessBack(PinchSlider sliderBack)
+    {
+        props.darkeningAmountBack = sliderBack.SliderValue;
+
+    }
+
+    public void Surface( )
+    {
+       // props.renderMode = ;
+
+    }
+
+    public void XRay()
+    {
+        // props.renderMode = ;
+
     }
 }
+
 
