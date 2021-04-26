@@ -14,90 +14,111 @@ public class DualSlider : MonoBehaviour
     public PinchSlider Back;
     public PinchSlider Front;
 
-    // Start is called before the first frame update
-    void Start()
+    public SlidersSyncer syncer;
+
+    public bool updating = false;
+
+    /**
+     * Syncs this dual slider to the given dual slider values 
+     */
+    public void sync(DualSlider slider)
     {
-        
+        XMax.SliderValue = slider.XMax.SliderValue;
+        XMin.SliderValue = slider.XMin.SliderValue;
+
+        YMax.SliderValue = slider.YMax.SliderValue;
+        YMin.SliderValue = slider.YMin.SliderValue;
+
+        ZMax.SliderValue = slider.ZMax.SliderValue;
+        ZMin.SliderValue = slider.ZMin.SliderValue;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void updateAxisMaxSlider(PinchSlider maxSlider, PinchSlider minSlider)
     {
-        
+        //We are checking if are already updating
+        //otherwise it will go into an infinite loop
+        //When overshooting the other slider
+        if (updating)
+            return;
+        updating = true;
+
+        if (maxSlider.SliderValue <= minSlider.SliderValue)
+        {
+            maxSlider.SliderValue = minSlider.SliderValue;
+        }
+        syncer.Sync(this);
+
+        updating = false;
+    }
+
+    public void updateAxisMinSlider(PinchSlider maxSlider, PinchSlider minSlider)
+    {
+        if (updating)
+            return;
+        updating = true;
+
+        if (maxSlider.SliderValue <= minSlider.SliderValue)
+        {
+            minSlider.SliderValue = maxSlider.SliderValue;
+        }
+        syncer.Sync(this);
+
+        updating = false;
     }
 
     public void YMaxUp()
     {
-        if (YMax.SliderValue <= YMin.SliderValue)
-        {
-            YMax.SliderValue = YMin.SliderValue;
-        }
+        updateAxisMaxSlider(YMax, YMin);
+        syncer.Sync(this);
     }
 
 
     public void ZMaxUp()
     {
-        if (ZMax.SliderValue <= ZMin.SliderValue)
-        {
-            ZMax.SliderValue = ZMin.SliderValue;
-        }
+        updateAxisMaxSlider(ZMax, ZMin);
+        syncer.Sync(this);
     }
 
 
     public void XMaxUp()
     {
-        if (XMax.SliderValue <= XMin.SliderValue)
-        {
-            XMax.SliderValue = XMin.SliderValue;
-        }
+        updateAxisMaxSlider(XMax, XMin);
+        syncer.Sync(this);
     }
 
 
 
     public void XMinUp()
     {
-        if (XMax.SliderValue <= XMin.SliderValue)
-        {
-            XMin.SliderValue = XMax.SliderValue;
-        }
+        updateAxisMinSlider(XMax, XMin);
+        syncer.Sync(this);
     }
 
     public void YMinUp()
     {
-        if (YMax.SliderValue <= YMin.SliderValue)
-        {
-            YMin.SliderValue = YMax.SliderValue;
-        }
+        updateAxisMinSlider(YMax, YMin);
+        syncer.Sync(this);
     }
 
 
     public void ZMinUp()
     {
-        if (ZMax.SliderValue <= ZMin.SliderValue)
-        {
-            ZMin.SliderValue = ZMax.SliderValue;
-        }
+        updateAxisMinSlider(ZMax, ZMin);
+        syncer.Sync(this);
     }
 
 
 
     public void FrontUp()
     {
-        if (Front.SliderValue <= Back.SliderValue)
-        {
-            Front.SliderValue = Back.SliderValue;
-        }
+        syncer.Sync(this);
     }
 
 
     public void BackUp()
     {
-        if (Front.SliderValue <= Back.SliderValue)
-        {
-            Back.SliderValue = Front.SliderValue;
-        }
+        syncer.Sync(this);
     }
-
 
 
 
