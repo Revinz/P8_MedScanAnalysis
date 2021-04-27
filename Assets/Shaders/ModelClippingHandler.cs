@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityVolumeRendering;
 using Microsoft.MixedReality.Toolkit.UI;
+using TMPro;
 
 public class ModelClippingHandler : MonoBehaviour
 {
@@ -37,8 +38,8 @@ public class ModelClippingHandler : MonoBehaviour
 
     private void Start()
     {
-        //string path = @"D:\Projects\Spine_HardTissue"; //Nikos
-        string path = @"C:\Users\Revinz\Desktop\backup2\school\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)"; //Patrick
+        string path = @"D:\Projects\Spine_HardTissue"; //Nikos
+        //string path = @"C:\Users\Revinz\Desktop\backup2\school\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)"; //Patrick
         VolumeDataset dataset = new DICOMLoader().LoadFolder(path);
         createModelObject(dataset);
         // UpdateXValues();
@@ -167,16 +168,51 @@ public class ModelClippingHandler : MonoBehaviour
 
     }
 
-    public void Surface( )
+    public void Visualization(TMP_Dropdown dropdown)
     {
-       // props.renderMode = ;
-
+        switch (dropdown.value)
+        {
+            case 0:
+                {
+                    props.renderMode = ClippingShaderProps.RenderingMode.XRAY;
+                    break;
+                }
+            case 1:
+                {
+                    props.renderMode = ClippingShaderProps.RenderingMode.SURFACE;
+                    break;
+                }
+           
+        }
     }
 
-    public void XRay()
-    {
-        // props.renderMode = ;
+   
 
+    public void changeQuality(TMP_Dropdown dropdown)
+    {
+        switch (dropdown.value)
+        {
+            case 0:
+                {
+                   
+                    break;
+                }
+            case 1:
+                {
+                   
+                    break;
+                }
+            case 2:
+                {
+
+                    break;
+                }
+            case 3:
+                {
+
+                    break;
+                }
+        }
     }
 }
 
