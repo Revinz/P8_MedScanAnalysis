@@ -37,7 +37,8 @@ public class ModelClippingHandler : MonoBehaviour
 
     private void Start()
     {
-        string path = @"D:\Projects\Spine_HardTissue";
+        //string path = @"D:\Projects\Spine_HardTissue"; //Nikos
+        string path = @"C:\Users\Revinz\Desktop\backup2\school\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)"; //Patrick
         VolumeDataset dataset = new DICOMLoader().LoadFolder(path);
         createModelObject(dataset);
         // UpdateXValues();
@@ -115,7 +116,7 @@ public class ModelClippingHandler : MonoBehaviour
       //  if (flag == true)
 
        // {
-            Debug.Log(ModelMeshes.Count);
+            //Debug.Log(ModelMeshes.Count);
             foreach (ModelMesh mesh in ModelMeshes)
             {
                 mesh.UpdateShaderProperties(props);
