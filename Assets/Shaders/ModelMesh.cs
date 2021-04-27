@@ -32,7 +32,7 @@ public class ModelMesh : MonoBehaviour
         propBlock.SetFloat("_DarkeningThresholdFront", props.darkeningAmountFront);
         propBlock.SetFloat("_DarkeningThresholdBack", props.darkeningAmountBack);
         propBlock.SetFloat("_renderingMode", (int)props.renderMode);
-
+        propBlock.SetFloat("_NumSteps", (float)props.Quality);
         rend.SetPropertyBlock(propBlock); 
     }
 }

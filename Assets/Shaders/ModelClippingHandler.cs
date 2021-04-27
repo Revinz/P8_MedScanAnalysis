@@ -190,29 +190,13 @@ public class ModelClippingHandler : MonoBehaviour
 
     public void changeQuality(TMP_Dropdown dropdown)
     {
-        switch (dropdown.value)
+        float temp;        
+        if (float.TryParse(dropdown.options[dropdown.value].text, out temp))
         {
-            case 0:
-                {
-                   
-                    break;
-                }
-            case 1:
-                {
-                   
-                    break;
-                }
-            case 2:
-                {
-
-                    break;
-                }
-            case 3:
-                {
-
-                    break;
-                }
+            props.Quality = temp;
         }
+
+        
     }
 }
 
