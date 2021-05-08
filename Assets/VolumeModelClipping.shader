@@ -46,7 +46,6 @@ SubShader {
         //properties for the volume rendering
         float _NumSteps;
         float _outlineThickness; //1 = Maximum Density, 2 = ISOSurface
-        
         sampler2D _CameraDepthTexture;
 
         #include "UnityCG.cginc"
@@ -143,10 +142,15 @@ SubShader {
                     const float3 lightDir = normalize(-rayDir); 
                     float lightReflection = abs(dot(normal, lightDir));
 
-                    //Change the shadow color since black = transparent on the HoloLens
-                    const float4 shadowColor = (1 - lightReflection) * float4(0, 0, 1, 1) * 0.5;
+                    //Change the colors since black = transparent on the HoloLens
+                    //Also more soft color to allow for extended usage
+                    const float4 shadowColor = (1 - lightReflection) * float4(0.46, 0.27, 0.13, 1) * 0.5;
+
+                    //Color + extra contrast for the lighter areas
+                    const float4 modelColor = float4(0.46, 0.27, 0.13, 1) + float4(lightReflection, lightReflection, lightReflection, 0) * 0.4;
+
     
-                    return float4(lightReflection, lightReflection, lightReflection,  1.0f) + shadowColor;
+                    return lightReflection * modelColor + shadowColor;
             }
         
             float4 frag (v2f i) : COLOR
