@@ -38,9 +38,10 @@ public class ModelClippingHandler : MonoBehaviour
 
     private void Start()
     {
-        string path = @"D:\Projects\Spine_HardTissue"; //Nikos
-        //string path = @"C:\Users\Revinz\Desktop\backup2\school\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)"; //Patrick
-        VolumeDataset dataset = new DICOMLoader().LoadFolder(path);
+        //string path = @"D:\Projects\Spine_HardTissue"; //Nikos
+        string path = @"C:\Users\Revinz\Desktop\backup2\school\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)"; //Patrick
+        string newDCMPath = @"C:\Users\Revinz\Desktop\DICOM-fracture-thoracic\Series1";
+        VolumeDataset dataset = new DICOMLoader().LoadFolder(newDCMPath);
         createModelObject(dataset);
         // UpdateXValues();
         // UpdateYValues();
