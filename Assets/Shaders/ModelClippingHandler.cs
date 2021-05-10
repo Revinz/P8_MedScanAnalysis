@@ -12,6 +12,11 @@ public class ModelClippingHandler : MonoBehaviour
     public Material[] _mat;
     [Header("Shader properties")]
     public ClippingShaderProps props;
+
+    [Header("Volume Dataset Options")]
+    public bool usePremadeTextures = false;
+    public bool createNewTextures = true;
+    public string NewTextureFileName = "Thoracic Spine Fracture";
     /*
     [Header("Slider Objects")]
     public MinMaxSlider sliderX;
@@ -41,7 +46,23 @@ public class ModelClippingHandler : MonoBehaviour
         //string path = @"D:\Projects\Spine_HardTissue"; //Nikos
         string path = @"C:\Users\Revinz\Desktop\backup2\school\MED8\Dicom3DModel\VitreaDVD\DICOM\ST00001\SE00001 - Copy (2)"; //Patrick
         string newDCMPath = @"C:\Users\Revinz\Desktop\DICOM-fracture-thoracic\Series1";
-        VolumeDataset dataset = new DICOMLoader().LoadFolder(newDCMPath);
+
+        VolumeDataset dataset;
+        if (!usePremadeTextures)
+        {
+            dataset = new DICOMLoader().LoadFolder(newDCMPath);
+            if (createNewTextures)
+            {
+                NewTextureFileName = NewTextureFileName.Trim();
+                AssetDatabase.CreateAsset(dataset.GetDataTexture(), "Assets/ShaderTextures/" + NewTextureFileName + "_volume.asset");
+                AssetDatabase.CreateAsset(dataset.GetGradientTexture(), "Assets/ShaderTextures/" + NewTextureFileName + "_gradient.asset");
+            }
+
+        }
+        else
+        {
+            dataset = GetComponent<VolumeDataset>();
+;       }
         createModelObject(dataset);
         // UpdateXValues();
         // UpdateYValues();

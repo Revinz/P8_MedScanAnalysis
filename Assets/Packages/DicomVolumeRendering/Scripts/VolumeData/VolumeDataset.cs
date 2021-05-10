@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnityVolumeRendering
 {
     [Serializable]
-    public class VolumeDataset : ScriptableObject
+    public class VolumeDataset : MonoBehaviour
     {
         [SerializeField]
         public int[] data = null;
@@ -18,8 +18,8 @@ namespace UnityVolumeRendering
 
         private int minDataValue = int.MaxValue;
         private int maxDataValue = int.MinValue;
-        private Texture3D dataTexture = null;
-        private Texture3D gradientTexture = null;
+        public Texture3D dataTexture = null;
+        public Texture3D gradientTexture = null;
 
         public Texture3D GetDataTexture()
         {
